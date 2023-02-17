@@ -817,7 +817,7 @@ echo tty1 > /etc/securetty
 chmod 0600 /etc/securetty
 chmod 700 /root
 chmod 600 /boot/grub/grub.cfg
-apt purge at
+apt purge -y at
 apt install -y libpam-cracklib
 touch /etc/cron.allow
 chmod 600 /etc/cron.allow
