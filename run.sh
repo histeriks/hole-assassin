@@ -299,7 +299,7 @@ EOF
 fi
 
 if [ "$XS_BASHRC" == "yes" ] ; then
-cat <<EOF > /root/.bashrc
+cat <<EOF > ~/.bashrc
 # ~/.bashrc: executed by bash(1) for non-login shells.
 [ -z "$PS1" ] && return
 HISTCONTROL=ignoredups:ignorespace
@@ -432,7 +432,7 @@ fi
 
 if [ "$XS_SSHD" == "yes" ] ; then
 cat <<EOF > /etc/ssh/sshd_config
-Port 22
+Port 372
 Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
@@ -472,6 +472,11 @@ Banner /etc/motd
 EOF
 fi
 
+clear
+echo -e "\033[1;32m\033[40m\033[5mSSH PORT CHANGED TO 372, USE \033[1;91m"ssh user@host -p 372"\033[1;32m\033[40m\033[5m FROM NOW ON WHEN CONNECTING!"
+sleep 7
+clear
+
 if [ "$XS_IPTABLES" == "yes" ] ; then
 cat <<EOF > /etc/init.d/iptables.sh
 #! /bin/sh
@@ -499,7 +504,7 @@ iptables -A INPUT   -p tcp -m tcp --dport 139 -m recent --name portscan --set -j
 iptables -A INPUT   -p tcp -m tcp --dport 139 -m recent --name portscan --set -j DROP
 iptables -A FORWARD -p tcp -m tcp --dport 139 -m recent --name portscan --set -j LOG --log-prefix "Portscan:"
 iptables -A FORWARD -p tcp -m tcp --dport 139 -m recent --name portscan --set -j DROP
-iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 372 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT
 EOF
 chmod +x /etc/init.d/iptables.sh
@@ -591,7 +596,7 @@ chmod 000 /usr/bin/*c++ >/dev/null 2>&1
 chmod 000 /usr/bin/*g++ >/dev/null 2>&1
 echo ""
 echo "to enable again restore permissions. for example: chmod 755 /usr/bin/gcc"
-sleep 5
+sleep 10
 clear
 fi
 
@@ -600,7 +605,7 @@ dpkg-reconfigure -plow unattended-upgrades
 fi
 
 if [ "$XS_ACCT" == "yes" ] ; then
-apt-get install acct
+apt-get install -y acct
 touch /var/log/wtmp
 fi
 
