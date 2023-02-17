@@ -48,7 +48,7 @@ XS_AUDITD="yes"
 XS_VARIOUS="yes"
 
 clear
-echo -e "\033[1;32m\033[40m\033[5mprocessing..."
+echo -e "\033[5m\e[1m\e[104m\e[93mprocessing...\e[0m"
 
 if [ "$XS_LANG" == "" ] ; then
 XS_LANG="en_US.UTF-8"
@@ -473,7 +473,7 @@ EOF
 fi
 
 clear
-echo -e "\033[1;32m\033[40m\033[5mSSH PORT CHANGED TO 372, USE \033[1;91m"ssh user@host -p 372"\033[1;32m\033[40m\033[5m FROM NOW ON WHEN CONNECTING!"
+echo -e "\033[5m\e[1m\e[104m\e[93mSSH PORT CHANGED TO 372, USE \e[97m"ssh user@host -p 372"\033[5m\e[1m\e[104m\e[93m FROM NOW ON WHEN CONNECTING!\e[0m"
 sleep 7
 clear
 
