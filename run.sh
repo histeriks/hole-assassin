@@ -772,7 +772,7 @@ sed -i s/umask\ 022/umask\ 027/g /etc/init.d/rc
 apt-get remove -y telnet
 echo "* hard core 0" >> /etc/security/limits.conf
 
-echo <<EOF > /etc/motd
+cat <<EOF > /etc/motd
 ################################################################################
               All connections are monitored and recorded
   Intrusion attempts will be reported to appropriate Law Enforcement Agencies
@@ -785,7 +785,7 @@ chmod 644 /etc/motd /etc/issue /etc/issue.net
 chown root:root /boot/grub/grub.cfg
 chmod og-rwx /boot/grub/grub.cfg
 
-echo <<EOF > /etc/pam.d/common-passwd
+cat <<EOF > /etc/pam.d/common-passwd
 password    requisite           pam_pwquality.so  try_first_pass retry=3
 password    [success=1 default=ignore]  pam_unix.so obscure use_authtok try_first_pass sha512
 password    requisite           pam_deny.so
@@ -793,7 +793,7 @@ password    required            pam_permit.so
 password sufficient pam_unix.so remember=5
 EOF
 
-echo <<EOF > /etc/security/pwquality.conf
+cat <<EOF > /etc/security/pwquality.conf
 minlen=14
 dcredit=-1
 ucredit=-1
@@ -801,7 +801,7 @@ ocredit=-1
 lcredit=-1
 EOF
 
-echo <<EOF > /etc/pam.d/common-auth
+cat <<EOF > /etc/pam.d/common-auth
 auth    [success=1 default=ignore]  pam_unix.so nullok_secure
 auth    requisite           pam_deny.so
 auth    required            pam_permit.so
