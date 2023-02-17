@@ -838,5 +838,5 @@ read -n1 confirm
 if echo $confirm | grep '^[Rr]\?$'; then
 reboot
 fi
-echo -e "quitting instead of rebooting. please do reboot as soon as you're done making changes! thanks"
+echo -e "quitting instead of rebooting. please do reboot as soon as you're done making changes! thanks\e[0m"
 exit 0
