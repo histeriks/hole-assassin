@@ -300,6 +300,7 @@ fi
 
 if [ "$XS_BASHRC" == "yes" ] ; then
 cat <<EOF > /root/.bashrc
+# ~/.bashrc: executed by bash(1) for non-login shells.
 [ -z "$PS1" ] && return
 HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
@@ -316,6 +317,9 @@ esac
 force_color_prompt=yes
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
 	color_prompt=yes
     else
 	color_prompt=
@@ -336,30 +340,31 @@ xterm*|rxvt*)
 esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -lh --color=auto'
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-alias ll='ls -alF --color=auto'
-alias la='ls -A --color=auto'
-alias l='ls -CF --color=auto'
-alias .='cd ..'
-alias ls='ls -l --color=auto'
-alias arestart='service apache2 restart'
-alias sysupdate='apt-get update; apt-get upgrade -y'
-alias doinstall='apt-get install'
-alias mv='mv -i'
-alias cp='cp -i'
-alias rm='rm -i'
-alias mysql='mysql -uroot -p'
-alias tree='tree --dirsfirst'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-function md5 {
-    php -r "echo md5('$1') . chr(10);"
-}
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+export HISTTIMEFORMAT="%d/%m/%y %T "
+export PS1='\u@\h:\W $ '
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+source /etc/profile.d/bash_completion.sh
+export PS1="\[\e[31m\][\[\e[m\]\[\e[38;5;172m\]\u\[\e[m\]@\[\e[38;5;153m\]\h\[\e[m\] \[\e[38;5;214m\]\W\[\e[m\]\[\e[31m\]]\[\e[m\]\$ "
 EOF
 
 echo "source /root/.bashrc" >> /root/.bash_profile
