@@ -48,7 +48,7 @@ XS_AUDITD="yes"
 XS_VARIOUS="yes"
 
 clear
-echo "processing .... "
+echo -e "\033[1;32m\033[40m\033[5mprocessing..."
 
 if [ "$XS_LANG" == "" ] ; then
 XS_LANG="en_US.UTF-8"
