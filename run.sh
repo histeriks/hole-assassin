@@ -474,7 +474,7 @@ fi
 
 clear
 echo -e "\033[5m\e[1m\e[104m\e[93mSSH PORT CHANGED TO 372, USE \e[97m"ssh user@host -p 372"\033[5m\e[1m\e[104m\e[93m FROM NOW ON WHEN CONNECTING!\e[0m"
-sleep 7
+sleep 10
 clear
 
 if [ "$XS_IPTABLES" == "yes" ] ; then
@@ -832,11 +832,11 @@ echo -e "\033[1;32m\033[40m##\033[1;93m  SYSTEM HARDENING & OPTIMIZATION SUCCESS
 echo -e "\033[1;32m\033[40m##\033[5m   press \033[1;91mR\033[1;32m\033[40m to reboot or any other key to quit   \033[0m\033[1;32m\033[40m##"
 echo -e "\033[1;32m\033[40m##                                                ##"
 echo -e "\033[1;32m\033[40m####################################################"
-echo -e "\033[1;32m\033[40m####################################################"
+echo -e "\033[1;32m\033[40m####################################################\e[0m"
 
 read -n1 confirm
 if echo $confirm | grep '^[Rr]\?$'; then
 reboot
 fi
-echo -e "quitting instead of rebooting. please do reboot as soon as you're done making changes! thanks\e[0m"
+echo -e "quitting instead of rebooting. please do reboot as soon as you're done making changes! thanks"
 exit 0
